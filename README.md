@@ -40,3 +40,11 @@ devtools::install_github("Swisstransplant/swt")
 
 ## References
 Schwab, S., Steck, H., Binet, I., Elmer, A., Ender, W., Franscini, N., Haidar, F., Kuhn, C., Sidler, D., Storni, F., Krügel, N., & Immer, F. (2023). EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. [doi:10.21203/rs.3.rs-2713168/v1](https://doi.org/10.21203/rs.3.rs-2713168/v1)
+
+## Terms of use
+This project is licensed under the terms of the AGPL-3 license. This means that EXAM is free software, everyone can copy, study, and modify the source code as long as the new version is shared under the same terms.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the `LICENSE` files for more details.
+
+Please let Swisstransplant know if you want to contribute to the project. Also let Swisstransplant know if you are a transplant organization and would like to use EXAM for quality control. 
+
