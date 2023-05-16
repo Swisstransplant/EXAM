@@ -12,13 +12,31 @@ EXAM was written in the R programming laungage and is based on the following too
 * [shiny](https://shiny.posit.co/), R package for interactive web applications
 * [swt](https://github.com/Swisstransplant/swt), the Swisstransplant R package
 
-## References
-
-Schwab, S., Steck, H., Binet, I., Elmer, A., Ender, W., Franscini, N., Haidar, F., Kuhn, C., Sidler, D., Storni, F., Krügel, N., & Immer, F. (2023). EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. [doi:10.21203/rs.3.rs-2713168/v1](https://doi.org/10.21203/rs.3.rs-2713168/v1)
+A detailed project description is provided in the reference at the bottom.
 
 ## Screenshot
 ![Screenshot of the EXAM dashboard.](images/screenshot.png)
 
 ## Live demo
-
 A live demo is available at [https://swisstransplant.shinyapps.io/EXAM/](https://swisstransplant.shinyapps.io/EXAM/).
+
+## How to install 
+
+1. Install R and RStudio
+2. Install all dependencies
+````
+install.packages("flexdashboard")
+install.packages("plotly")
+install.packages("shiny")
+````
+
+3. Install the swt packages
+```
+install.packages("devtools")
+devtools::install_github("Swisstransplant/swt")
+```
+
+4. Download `EXAM.Rmd` and run from RStudio
+
+## References
+Schwab, S., Steck, H., Binet, I., Elmer, A., Ender, W., Franscini, N., Haidar, F., Kuhn, C., Sidler, D., Storni, F., Krügel, N., & Immer, F. (2023). EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. [doi:10.21203/rs.3.rs-2713168/v1](https://doi.org/10.21203/rs.3.rs-2713168/v1)
