@@ -1,4 +1,4 @@
-# EXAM: Ex vivo allograft monitoring dashboard
+# EXAM: Ex vivo allograft monitoring dashboard <img src="images/exam.png" align="right" width=120 height=139 alt="" />
 
 EXAM (ex vivo allograft monitoring) is an analytics dashboard for the analysis of hypothermic machine per-fusion data in deceased-donor kidney transplantation.
 
@@ -24,14 +24,14 @@ A live demo is available at [https://swisstransplant.shinyapps.io/EXAM/](https:/
 
 1. Install R and RStudio
 2. Install all dependencies
-````
+```r
 install.packages("flexdashboard")
 install.packages("plotly")
 install.packages("shiny")
 ````
 
 3. Install the swt packages
-```
+```r
 install.packages("devtools")
 devtools::install_github("Swisstransplant/swt")
 ```
