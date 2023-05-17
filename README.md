@@ -33,11 +33,11 @@ install.packages("rmarkdown")
 
 3. Install the swt packages
 ```r
-install.packages("devtools")
-devtools::install_github("Swisstransplant/swt")
+install.packages("remotes")
+remotes::install_github("Swisstransplant/swt")
 ```
 
-4. Download `EXAM.Rmd` from here, open it in RStudio and press "Run Document"
+4. Download EXAM as zip file (press the green button "Code"), unpack it locally and open `EXAM.Rmd` in RStudio and press "Run Document"
 
 ## References
 Schwab, S., Steck, H., Binet, I., Elmer, A., Ender, W., Franscini, N., Haidar, F., Kuhn, C., Sidler, D., Storni, F., Krügel, N., & Immer, F. (2023). EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. [doi:10.21203/rs.3.rs-2713168/v1](https://doi.org/10.21203/rs.3.rs-2713168/v1)
