@@ -22,12 +22,13 @@ A live demo is available at [https://swisstransplant.shinyapps.io/EXAM/](https:/
 
 ## How to install 
 
-1. Install R and RStudio
-2. Install all dependencies
+1. Install [R](https://cran.rstudio.com/) and [RStudio](https://posit.co/download/rstudio-desktop/)
+2. Open RStudio and install all dependencies. Enter the following commands in the Console:
 ```r
 install.packages("flexdashboard")
 install.packages("plotly")
 install.packages("shiny")
+install.packages("rmarkdown")
 ````
 
 3. Install the swt packages
@@ -36,7 +37,7 @@ install.packages("devtools")
 devtools::install_github("Swisstransplant/swt")
 ```
 
-4. Download `EXAM.Rmd` and run from RStudio
+4. Download `EXAM.Rmd` from here, open it in RStudio and press "Run Document"
 
 ## References
 Schwab, S., Steck, H., Binet, I., Elmer, A., Ender, W., Franscini, N., Haidar, F., Kuhn, C., Sidler, D., Storni, F., Krügel, N., & Immer, F. (2023). EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. [doi:10.21203/rs.3.rs-2713168/v1](https://doi.org/10.21203/rs.3.rs-2713168/v1)
