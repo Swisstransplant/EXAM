@@ -5,6 +5,8 @@ EXAM (ex vivo allograft monitoring) is an analytics dashboard for the analysis o
 ## Background
 Deceased-donor kidney allografts are exposed to injury during ex vivo transport due to the lack of blood oxygen supply. Hypothermic machine perfusion (HMP) effectively reduces the risk of delayed graft function in kidney transplant recipients compared to standard cold storage. However, there is no software implementation available to read, process and analyze HMP data for state-of-the-art visualization and quality control.
 
+Currently, EXAM can read and process raw data from the LifePort kidney transporter (Organ Recovery Systems, USA).
+
 ## Project description
 EXAM was written in the R programming language and is based on the following tools.
 * [flexdashbord](https://pkgs.rstudio.com/flexdashboard/), a interactive dashboard for R
