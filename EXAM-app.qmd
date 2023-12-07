@@ -1,0 +1,422 @@
+---
+title: "EXAM: Ex-vivo allograft monitoring"
+author: "v1.1"
+format:
+  dashboard:
+    nav-buttons:
+      - icon: github
+        href: https://github.com/Swisstransplant/EXAM
+    link-external-icon: false
+    link-external-newwindow: true
+    # link-external-filter: '^(?:http:|https:)\/\/www\.quarto\.org\/custom'
+    theme: 
+      - default
+      - swt_dashboard.scss
+    fontsize: 1.0em
+    linestretch: 1.0
+logo: images/SWT_negativ_2021.png
+server: shiny
+---
+
+```{r}
+#| context: setup
+
+library(fs) # MIT
+library(shiny) # GPL-3
+library(plotly) # MIT
+library(swt) # GPL-3
+# Quarto MIT
+
+# SWT colors
+col = swt_colors()
+
+# load internal example data from package swt
+data("exam-examples")
+
+# helper functions for plotly
+hline <- function(y = 0, color = "grey", type="dash") {
+  list(
+    type = "line", 
+    x0 = 0, 
+    x1 = 1, 
+    xref = "paper",
+    y0 = y, 
+    y1 = y, 
+    line = list(color = color, dash=type)
+  )
+}
+
+vline <- function(x = 0, color = "grey", type="dash") {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash=type)
+  )
+}
+```
+
+# {.sidebar}
+
+```{r}
+
+selectInput(inputId = "ID", label = "Select example dataset:",
+            choices = sort(exam.organ$ID, decreasing = TRUE))
+
+fileInput(inputId = "file1", label = "Upload LifePort data file:",
+          multiple = FALSE,
+          accept = c("text/csv",
+                     "text/comma-separated-values,text/plain",
+                     ".csv"))
+```
+
+
+::: {.callout-warning collapse="false"}
+## Important
+Hypothermic machine perfusion data alone should never be used as the sole basis to discard a kidney allograft.
+:::
+---
+::: {.callout-note collapse="true"}
+## Terms of use
+
+EXAM: Ex-vivo allograft monitoring
+
+Copyright (C) 2023  Swisstransplant
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) for more details.
+:::
+
+# Kidney Lifeport Dashboard
+
+## Row {height="11%"}
+
+```{r}
+#| title: Organ and Device Information
+tableOutput('Tab_info')
+```
+
+## Row {.flow height="39%"}
+
+::: {.card title="Pressure"}
+
+```{r}
+plotlyOutput('Fig1')
+tableOutput('Tab1')
+```
+:::
+
+::: {.card title="Flow Rate"}
+
+```{r}
+plotlyOutput('Fig2')
+tableOutput('Tab2')
+```
+:::
+
+## Row {height="39%"}
+
+::: {.card title="Vascular Resistance"}
+
+```{r}
+plotlyOutput('Fig3')
+tableOutput('Tab3')
+```
+:::
+
+::: {.card title="Temperature"}
+
+```{r}
+plotlyOutput('Fig4')
+tableOutput('Tab4')
+```
+:::
+
+## Row {height="11%"}
+
+```{r}
+#| title: Quality Control
+tableOutput('Tab_qual')
+```
+
+# About
+
+::: {.card}
+
+## What is EXAM?
+EXAM (ex vivo allograft monitoring) is an analytics dashboard for hypothermic machine perfusion data in deceased-donor kidney transplantation. It supports data from the ORS LifePort Kidney Transporter.
+
+## How was KIDMO developed?
+EXAM was developed by [Swisstransplant](https://www.swisstransplant.org/)---the *Swiss National Foundation for organ donation and transplantation* and the transplant centers. Further information can be found in the reference below.
+
+Schwab S, Steck H, Binet I, Elmer A, Ender W, Franscini N, Haidar F, Kuhn C, Sidler D, Storni F, Kr&uuml;gel N, Immer F. EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. 2023. [doi:10.21203/rs.3.rs-2713168/v1](http://dx.doi.org/10.21203/rs.3.rs-2713168/v1)
+
+## Contact
+
+For inquiries about EXAM please contact Simon Schwab <simon.schwab@swisstransplant.org>
+
+::: {{layout-ncol=4}}
+
+![Surus](images/SWT_2955_2021.png){height=80 style="float:left; padding:16px"}
+![Surus](images/HUG.png){height=80 style="float:left; padding:16px"}
+![Surus](images/Insel.png){height=80 style="float:left; padding:16px"}
+![Surus](images/KSSG.png){height=80 style="padding:16px"}
+
+:::
+
+:::
+
+```{r}
+#| context: server
+
+# I need reactive value because the dataset can either be from 
+# 1) the internal data or
+# 2) the file upload
+dataset = reactiveVal()
+
+# 1) select dataset from internal example data from package swt
+observeEvent(input$ID, {
+  i = which(exam.organ$ID == input$ID)
+  # I create a data list from the internal data
+  dataset(list(data.device = exam.device[i,],
+               data.organ = exam.organ[i,],
+               data = exam.timeseries[[i]],
+               data.sumstats = exam.sumstats[i,]))
+})
+
+# 2) read data from file upload
+observeEvent(input$file1, {
+  
+  # read data, processing and sumstats
+  
+  # error handling when damaged lifeport data file is uploaded
+  lp_data = tryCatch({
+    
+    lp_data = lifeport_read(file = input$file1$datapath, format = "guess")
+    lp_data = lifeport_process(lp_data)
+    lp_data = lifeport_sumstats(lp_data)
+    lp_data$data.organ$ID = gsub("\\.txt$|\\.TXT$", "", basename(input$file1$name))
+    
+    # Calculate quality indicator
+    # subset variables: 7 dimensions
+    tmp = subset(lp_data$data.sumstats, select = c("iceContainerTemperature.mean",
+                                                   "iceContainerTemperature.sd",
+                                                   "iceContainerTemperature.minAbove",
+                                                   "infuseTemperature.start",
+                                                   "infuseTemperature.mean",
+                                                   "infuseTemperature.sd",
+                                                   "infuseTemperature.minAbove"))
+    
+    # calculate for all datasets, if missing data D2 will be NA
+    lp_data$data.sumstats$D2temp = lifeport_d2_temp(data = tmp)
+    lp_data$data.sumstats$Ptemp  = lifeport_d2prc_temp(lp_data$data.sumstats$D2temp)
+    
+    dataset(lp_data)
+    
+  }, error = function(e) {
+    
+    showModal(modalDialog(
+      title = "Error reading file",
+      "The file does not contain valid LifePort data. Maybe you selected the wrong file or the file has been damaged.",
+      easyClose = FALSE
+    ))
+    
+  })
+  
+})
+
+# Figure 1: Pressure Chart
+output$Fig1 <- renderPlotly({
+  
+  lst = dataset() # data is a list
+  
+  # converting from wide to long
+  d = data.frame(pressure = c(lst$data$SystolicPressure.flt, 
+                              lst$data$DiastolicPressure.flt),
+                 time.clock = c(lst$data$time.clock, 
+                                lst$data$time.clock),
+                 group = c(rep("systolic pressure", nrow(lst$data)), 
+                           rep("diastolic pressure", nrow(lst$data))))
+  d$group = factor(d$group, levels = c("systolic pressure", "diastolic pressure"))
+  
+  # figure
+  fig = plot_ly(d, x=~time.clock, y=~pressure, type="scatter", mode="lines", 
+                color=~group, colors = c(col$blue.swt, col$darkyellow.kidney))
+  fig = fig %>% layout(yaxis = list(title = "mmHg", range = c(0, 45)),
+                       xaxis = list(title = "Time"),
+                       legend = list(orientation = 'h',  yanchor = "bottom",  
+                                     y = 1.02, x = 1, xanchor = "right"),
+                       shapes = list(hline(30))
+  )
+  
+})
+
+# Figure 2: Flow Rate Chart
+output$Fig2 <- renderPlotly({
+  
+  lst = dataset() # data is a list
+  d = lst$data
+  
+  # handle timeseries shorter than 30 min.
+  if(length(d$time.clock) >= 181) {
+    tgreyend =  d$time.clock[181]
+  } else {
+    tgreyend = d$time.clock[length(d$time.clock)]
+  }
+  
+  # figure
+  fig = plot_ly(d, x=~time.clock, y=~FlowRate.flt, type="scatter", mode="lines", 
+                color="all", colors = col$blue.swt)
+  fig = fig %>% layout(yaxis = list(title = "ml/min", range = c(0, 200)),
+                       xaxis = list(title = "Time"),
+                       shapes = list(hline(85), 
+                                     list(type = "rect", fillcolor = "grey",
+                                          line = list(color = "grey"), opacity = 0.3,
+                                          x0 = d$time.clock[1], x1 = tgreyend, xref = "x",
+                                          y0 = 0, y1 = 200, yref = "y")
+                       )
+  )
+  
+})
+
+# Figure 3: Flow Rate Chart
+output$Fig3 <- renderPlotly({
+  
+  lst = dataset() # data is a list
+  d = lst$data
+  
+  # handle timeseries shorter than 30 min.
+  if(length(d$time.clock) >= 181) {
+    tgreyend =  d$time.clock[181]
+  } else {
+    tgreyend = d$time.clock[length(d$time.clock)]
+  }
+  
+  # figure
+  fig = plot_ly(d, x=~time.clock, y=~OrganResistance.flt, type="scatter", mode="lines", 
+                color="all", colors = col$blue.swt)
+  fig = fig %>% layout(yaxis = list(title = "mmHg/ml/min", range = c(0, 0.5)),
+                       xaxis = list(title = "Time"),
+                       shapes = list(hline(0.10), 
+                                     hline(0.30),
+                                     list(type = "rect", fillcolor = "grey",
+                                          line = list(color = "grey"), opacity = 0.3,
+                                          x0 = d$time.clock[1], x1 = tgreyend, xref = "x",
+                                          y0 = 0, y1 = 0.5, yref = "y")
+                       )
+  )
+  
+})
+
+# Figure 4: Temperature Chart
+output$Fig4 <- renderPlotly({
+  
+  HIGH_INF_TEMP = 10
+  HIGH_ICE_TEMP = 2.5
+  
+  lst = dataset() # data is a list
+  
+  # prepare time series of ice and perf temp too high
+  is_high_perf = lst$data$InfuseTemperature > HIGH_INF_TEMP &
+    lst$data$FlowRate.flt > 5 & !is.na(lst$data$FlowRate.flt)
+  high_perf = lst$data$InfuseTemperature
+  high_perf[!is_high_perf] = NA
+  
+  is_high_ice = lst$data$IceContainerTemperature > HIGH_ICE_TEMP &
+    lst$data$FlowRate.flt > 5 & !is.na(lst$data$FlowRate.flt)
+  high_ice = lst$data$IceContainerTemperature
+  high_ice[!is_high_ice] = NA
+  
+  # converting from wide to long
+  d = data.frame(temperature = c(lst$data$IceContainerTemperature, 
+                                 lst$data$InfuseTemperature,
+                                 high_perf,
+                                 high_ice),
+                 time.clock = rep(lst$data$time.clock, 4),
+                 group = c(rep("ice temperature", nrow(lst$data)), 
+                           rep("perfusate temperature", nrow(lst$data)),
+                           rep("high temperature", nrow(lst$data)),
+                           rep("high temperature", nrow(lst$data))
+                 ))
+  d$group = factor(d$group, levels = c("ice temperature", 
+                                       "perfusate temperature",
+                                       "high temperature"))
+  
+  # figure
+  fig = plot_ly(d, x=~time.clock, y=~temperature, type="scatter", mode="lines", 
+                color=~group, colors = c(col$blue.swt, 
+                                         col$darkyellow.kidney,
+                                         col$strongred.akzent))
+  fig = fig %>% layout(yaxis = list(title = "Degrees Celsius", range = c(0, 20)),
+                       xaxis = list(title = "Time"),
+                       legend = list(orientation = 'h',  yanchor = "bottom",  
+                                     y = 1.02, x = 1, xanchor = "right"),
+                       shapes = list(hline(5), hline(10))
+  )
+  
+})
+
+# Info table
+output$Tab_info <- renderTable({
+  lst = dataset()
+  tab = cbind(lst$data.organ[, "ID"],
+              lst$data.device[, c("SerialNumber", "UnitID", "StartTime", 
+                                  "StopTime", "Runtime")],
+              lst$data.sumstats[, "perfusion.dur.str"]
+  )
+  colnames(tab) = c("File ID", "Serial no.", "Unit ID", 
+                    "Start time", "Stop time", "Run time", "Perfusion time")
+  tab
+})
+
+# Tables with Summary statistics
+output$Tab1 <- renderTable({
+  lst = dataset()
+  tab = lst$data.sumstats[, c("systolicPressure.md", "diastolicPressure.mean")] 
+  colnames(tab) = c("<i>md</i><sub>sys</sub>", "<i>m</i><sub>dia</sub>")
+  tab
+}, sanitize.text.function = function(x) x) # needed for formatting special characters
+
+output$Tab2 <- renderTable({
+  lst = dataset()
+  tab = lst$data.sumstats[, "flowRate.mean", drop = FALSE] 
+  colnames(tab) = c("<i>m</i><sub>flow</sub>")
+  tab
+}, sanitize.text.function = function(x) x) # needed for formatting special characters
+
+output$Tab3 <- renderTable({
+  lst = dataset()
+  tab = lst$data.sumstats[, "organResistance.mean", drop = FALSE] 
+  colnames(tab) = c("<i>m</i><sub>res</sub>")
+  tab
+}, sanitize.text.function = function(x) x) # needed for formatting special characters
+
+output$Tab4 <- renderTable({
+  lst = dataset()
+  tab = lst$data.sumstats[, c("iceContainerTemperature.mean","iceContainerTemperature.sd",
+                              "iceContainerTemperature.minAbove.str", "infuseTemperature.start",
+                              "infuseTemperature.mean", "infuseTemperature.sd",
+                              "infuseTemperature.minAbove.str")] 
+  colnames(tab) = c("<i>m</i><sub>ice</sub>", "<i>SD</i><sub>ice</sub>", 
+                    "<i>&#916t</i><sub>y > 2.5</sub>", "<i>y</i><sub>start</sub>",
+                    "<i>m</i><sub>perf</sub>", "<i>SD</i><sub>perf</sub>", 
+                    "<i>&#916t</i><sub>y > 10</sub>")
+  tab
+}, sanitize.text.function = function(x) x) # needed for formatting special characters
+
+# Table Quality Control
+output$Tab_qual <- renderTable({
+  lst = dataset()
+  tab = cbind(
+    lst$data.organ[, c("OrganID", "KidneySide")],
+    lst$data.sumstats[, c("D2temp", "Ptemp")]
+  )
+  colnames(tab) = c("Organ ID entry", "Kidney side entry",
+                    "<i>D</i><sup>2</sup><sub>temp</sub>",
+                    "<i>P</i><sub>temp</sub>")
+  
+  tab
+}, sanitize.text.function = function(x) x) # needed for formatting special characters
+```
