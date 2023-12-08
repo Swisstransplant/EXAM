@@ -1,4 +1,4 @@
-# EXAM: Ex vivo allograft monitoring dashboard <img src="images/exam.png" align="right" width=120 height=139 alt="" />
+# EXAM: Ex vivo allograft monitoring dashboard <img src="images/exam_hex.png" align="right" width=120 height=139 alt="" />
 
 EXAM (ex vivo allograft monitoring) is an analytics dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation.
 
