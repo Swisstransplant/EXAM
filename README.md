@@ -9,7 +9,7 @@ EXAM can read, process and visualize raw data from the LifePort kidney transport
 
 ## Project description
 EXAM was written in the R programming language and is based on the following tools.
-* [Quarto Dashboards](https://quarto.org/docs/dashboards/), a interactive dashboard for R
+* [Quarto Dashboard](https://quarto.org/docs/dashboards/), a interactive dashboard for R
 * [plotly](https://plotly.com/graphing-libraries/), a graphics library for interactive charts
 * [shiny](https://shiny.posit.co/), R package for interactive web applications
 * [swt](https://github.com/Swisstransplant/swt), the Swisstransplant R package
