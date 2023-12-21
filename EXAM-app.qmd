@@ -141,6 +141,24 @@ tableOutput('Tab4')
 tableOutput('Tab_qual')
 ```
 
+# Indicators
+
+| Class                  | Indicator   | Meaning                  | Unit            |
+|------------------------|:------------|:-------------------------|:----------------|
+| Perfusion indicators   | $md_{sys}$  | median systolic pressure | mmHg            |
+|                        | $m_{dia}$   | mean diastolic pressure  | mmHg            |
+|                        | $m_{flow}$  | mean flow rate           | ml/min          |
+|                        | $m_{res}$   | mean vascular resistance | mmHg/ml/min     |
+| Temperature indicators | $m_{ice}$            | mean ice temperature                                        | $\textdegree$C |
+|                        | $SD_{ice}$           | standard deviation of ice temperature                       | $\textdegree$C |
+|                        | $\Delta t_{ice>2.5}$ | time duration ice temperature is above 2.5$\textdegree$C    | MM:HH:SS       |
+|                        | $y_{\text{perf. start}}$ | perfusate temperature at start                          | $\textdegree$C |
+|                        | $m_{perf}$           | mean perfusate temperature                              | $\textdegree$C |
+|                        | $SD_{perf}$          | standard deviation of perfusate temperature             | $\textdegree$C |
+|                        | $\Delta t_{perf>10}$ | time duration perfusate temperature is above 10$\textdegree$C | MM:HH:SS     |
+| Quality control indicators | $D^2_{temp}$     | Distance of the case from other cases with respect to temperature (a lower score is better). It can be seen as the deviation from the norm. |  |
+|                        | $P_{temp}$     | Percentile rank of the $D^2_{temp}$ indicators. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  |  |
+
 # About
 
 ::: {.card}
@@ -159,7 +177,7 @@ Quality control with EXAM can identify problems during HMP and can inform guidel
 
 ## Contact
 
-For inquiries about EXAM please contact Simon Schwab <simon.schwab@swisstransplant.org>
+For inquiries about EXAM please contact Simon Schwab <simon.schwab@swisstransplant.org>.
 
 ## Reference
 Schwab S, Steck H, Binet I, Elmer A, Ender W, Franscini N, Haidar F, Kuhn C, Sidler D, Storni F, Kr&uuml;gel N, Immer F. EXAM: Ex vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *Research Square*. 2023. [doi:10.21203/rs.3.rs-2713168/v1](http://dx.doi.org/10.21203/rs.3.rs-2713168/v1)
@@ -407,9 +425,9 @@ output$Tab4 <- renderTable({
                               "infuseTemperature.mean", "infuseTemperature.sd",
                               "infuseTemperature.minAbove.str")] 
   colnames(tab) = c("<i>m</i><sub>ice</sub>", "<i>SD</i><sub>ice</sub>", 
-                    "<i>&#916t</i><sub>y > 2.5</sub>", "<i>y</i><sub>start</sub>",
+                    "<i>&#916t</i><sub>y>2.5</sub>", "<i>y</i><sub>perf. start</sub>",
                     "<i>m</i><sub>perf</sub>", "<i>SD</i><sub>perf</sub>", 
-                    "<i>&#916t</i><sub>y > 10</sub>")
+                    "<i>&#916t</i><sub>y>10</sub>")
   tab
 }, sanitize.text.function = function(x) x) # needed for formatting special characters
 
