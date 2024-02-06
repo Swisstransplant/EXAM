@@ -1,6 +1,6 @@
 ---
 title: "EXAM: Ex-vivo allograft monitoring"
-author: "v1.1"
+author: "v1.2"
 format:
   dashboard:
     nav-buttons:
@@ -20,10 +20,12 @@ server: shiny
 
 ```{r}
 #| context: setup
+#| warning: false
+#| message: false
 
 library(fs) # MIT
 library(shiny) # GPL-3
-library(plotly) # MIT
+suppressPackageStartupMessages(library(plotly)) # MIT
 library(swt) # GPL-3
 # Quarto MIT
 
@@ -32,6 +34,15 @@ col = swt_colors()
 
 # load internal example data from package swt
 data("exam-examples")
+
+# load swt data instead and overwrite example variables
+# PATH_DATA    = file.path(path_home(), "OneDrive - Swisstransplant", "Projects", "EXAM", "data")
+# load(file.path(PATH_DATA, "exam.RData"))
+# 
+# exam.device     = data.device
+# exam.organ      = data.organ
+# exam.sumstats   = data.sumstats
+# exam.timeseries = data.timeseries
 
 # helper functions for plotly
 hline <- function(y = 0, color = "grey", type="dash") {
@@ -149,15 +160,20 @@ tableOutput('Tab_qual')
 |                        | $m_{dia}$   | mean diastolic pressure  | mmHg            |
 |                        | $m_{flow}$  | mean flow rate           | ml/min          |
 |                        | $m_{res}$   | mean vascular resistance | mmHg/ml/min     |
+|                        | $SD_{res}$  | standard deviation of vascular resistance | mmHg/ml/min     |
+|                        | $\Delta_{res}$   | drop in vascular resistance within the first 60 min | mmHg/ml/min     |
+|                        | $\beta_{res}$    | drop in vascular resistance per Minute | mmHg/ml/min$^2$ |
 | Temperature indicators | $m_{ice}$            | mean ice temperature                                        | $\textdegree$C |
 |                        | $SD_{ice}$           | standard deviation of ice temperature                       | $\textdegree$C |
 |                        | $\Delta t_{ice>2.5}$ | time duration ice temperature is above 2.5$\textdegree$C    | MM:HH:SS       |
-|                        | $y_{\text{perf. start}}$ | perfusate temperature at start                          | $\textdegree$C |
+|                        | $y_{\text{start}}$ | perfusate temperature at start                          | $\textdegree$C |
 |                        | $m_{perf}$           | mean perfusate temperature                              | $\textdegree$C |
 |                        | $SD_{perf}$          | standard deviation of perfusate temperature             | $\textdegree$C |
 |                        | $\Delta t_{perf>10}$ | time duration perfusate temperature is above 10$\textdegree$C | MM:HH:SS     |
-| Quality control indicators | $D^2_{temp}$     | Distance of the case from other cases with respect to temperature (a lower score is better). It can be seen as the deviation from the norm. |  |
-|                        | $P_{temp}$     | Percentile rank of the $D^2_{temp}$ indicators. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  |  |
+| Quality control        | $D^2_{perf}$     | Distance of the case from other cases with respect to perfusion indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
+|                        | $P_{perf}$       | Percentile rank of $D^2_{perf}$. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  | % |
+|                        | $D^2_{temp}$     | Distance of the case from other cases with respect to temperature indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
+|                        | $P_{temp}$       | Percentile rank of $D^2_{temp}$. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  | % |
 
 # About
 
@@ -226,17 +242,28 @@ observeEvent(input$file1, {
     
     # Calculate quality indicator
     # subset variables: 7 dimensions
-    tmp = subset(lp_data$data.sumstats, select = c("iceContainerTemperature.mean",
-                                                   "iceContainerTemperature.sd",
-                                                   "iceContainerTemperature.minAbove",
-                                                   "infuseTemperature.start",
-                                                   "infuseTemperature.mean",
-                                                   "infuseTemperature.sd",
-                                                   "infuseTemperature.minAbove"))
+    tmp.perf = subset(lp_data$data.sumstats, select = c("systolicPressure.md",
+                                                        "diastolicPressure.mean",
+                                                        "flowRate.mean",
+                                                        "organResistance.mean",
+                                                        "organResistance.sd",
+                                                        "organResistance.delta",
+                                                        "organResistance.slope"))
+    
+    tmp.temp = subset(lp_data$data.sumstats, select = c("iceContainerTemperature.mean",
+                                                        "iceContainerTemperature.sd",
+                                                        "iceContainerTemperature.minAbove",
+                                                        "infuseTemperature.start",
+                                                        "infuseTemperature.mean",
+                                                        "infuseTemperature.sd",
+                                                        "infuseTemperature.minAbove"))
     
     # calculate for all datasets, if missing data D2 will be NA
-    lp_data$data.sumstats$D2temp = lifeport_d2_temp(data = tmp)
-    lp_data$data.sumstats$Ptemp  = lifeport_d2prc_temp(lp_data$data.sumstats$D2temp)
+    lp_data$data.sumstats$D2perf = lifeport_d2(data = tmp.perf, type = "perf")
+    lp_data$data.sumstats$D2temp = lifeport_d2(data = tmp.temp, type = "temp")
+    
+    lp_data$data.sumstats$Pperf  = lifeport_d2toRank(lp_data$data.sumstats$D2perf, type = "perf")
+    lp_data$data.sumstats$Ptemp  = lifeport_d2toRank(lp_data$data.sumstats$D2temp, type = "temp")
     
     dataset(lp_data)
     
@@ -311,6 +338,7 @@ output$Fig3 <- renderPlotly({
   
   lst = dataset() # data is a list
   d = lst$data
+  s = lst$data.sumstats
   
   # handle timeseries shorter than 30 min.
   if(length(d$time.clock) >= 181) {
@@ -321,9 +349,17 @@ output$Fig3 <- renderPlotly({
   
   # figure
   fig = plot_ly(d, x=~time.clock, y=~OrganResistance.flt, type="scatter", mode="lines", 
-                color="all", colors = col$blue.swt)
+                color="all", colors = col$blue.swt, name = "vascular resistance")
+  
+  fig = fig %>% add_trace(x = c(d$time.clock[s$organResistance.x1], 
+                                d$time.clock[s$organResistance.x2]),
+                          y = c(s$organResistance.y1, s$organResistance.y2), 
+                          mode = "markers+lines", color = I(col$strongred.akzent), name = "slope")
+  
   fig = fig %>% layout(yaxis = list(title = "mmHg/ml/min", range = c(0, 0.5)),
                        xaxis = list(title = "Time"),
+                       legend = list(orientation = 'h',  yanchor = "bottom",  
+                                     y = 1.02, x = 1, xanchor = "right"),
                        shapes = list(hline(0.10), 
                                      hline(0.30),
                                      list(type = "rect", fillcolor = "grey",
@@ -349,8 +385,7 @@ output$Fig4 <- renderPlotly({
   high_perf = lst$data$InfuseTemperature
   high_perf[!is_high_perf] = NA
   
-  is_high_ice = lst$data$IceContainerTemperature > HIGH_ICE_TEMP &
-    lst$data$FlowRate.flt > 5 & !is.na(lst$data$FlowRate.flt)
+  is_high_ice = lst$data$IceContainerTemperature > HIGH_ICE_TEMP
   high_ice = lst$data$IceContainerTemperature
   high_ice[!is_high_ice] = NA
   
@@ -413,8 +448,10 @@ output$Tab2 <- renderTable({
 
 output$Tab3 <- renderTable({
   lst = dataset()
-  tab = lst$data.sumstats[, "organResistance.mean", drop = FALSE] 
-  colnames(tab) = c("<i>m</i><sub>res</sub>")
+  tab = lst$data.sumstats[, c("organResistance.mean", "organResistance.sd",
+                              "organResistance.delta","organResistance.slope"), drop = FALSE] 
+  colnames(tab) = c("<i>m</i><sub>res</sub>", "<i>SD</i><sub>res</sub>",
+                    "<i>&#916</i><sub>res</sub>", "<i>&#946</i><sub>res</sub>")
   tab
 }, sanitize.text.function = function(x) x) # needed for formatting special characters
 
@@ -423,9 +460,9 @@ output$Tab4 <- renderTable({
   tab = lst$data.sumstats[, c("iceContainerTemperature.mean","iceContainerTemperature.sd",
                               "iceContainerTemperature.minAbove.str", "infuseTemperature.start",
                               "infuseTemperature.mean", "infuseTemperature.sd",
-                              "infuseTemperature.minAbove.str")] 
+                              "infuseTemperature.minAbove.str")]
   colnames(tab) = c("<i>m</i><sub>ice</sub>", "<i>SD</i><sub>ice</sub>", 
-                    "<i>&#916t</i><sub>y>2.5</sub>", "<i>y</i><sub>perf. start</sub>",
+                    "<i>&#916t</i><sub>y>2.5</sub>", "<i>y</i><sub>start</sub>",
                     "<i>m</i><sub>perf</sub>", "<i>SD</i><sub>perf</sub>", 
                     "<i>&#916t</i><sub>y>10</sub>")
   tab
@@ -436,9 +473,13 @@ output$Tab_qual <- renderTable({
   lst = dataset()
   tab = cbind(
     lst$data.organ[, c("OrganID", "KidneySide")],
-    lst$data.sumstats[, c("D2temp", "Ptemp")]
+    lst$data.sumstats[, c("D2perf", "Pperf", "D2temp", "Ptemp")]
   )
+  tab$Pperf = sprintf("%.0f%%", tab$Pperf*100)
+  tab$Ptemp = sprintf("%.0f%%", tab$Ptemp*100)
   colnames(tab) = c("Organ ID entry", "Kidney side entry",
+                    "<i>D</i><sup>2</sup><sub>perf</sub>",
+                    "<i>P</i><sub>perf</sub>",
                     "<i>D</i><sup>2</sup><sub>temp</sub>",
                     "<i>P</i><sub>temp</sub>")
   
