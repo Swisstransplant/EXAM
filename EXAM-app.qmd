@@ -14,7 +14,7 @@ format:
       - swt_dashboard.scss
     fontsize: 0.95em
     linestretch: 1.2
-logo: images/SWT_negativ_2021.png
+logo: images/SWT_icon_cmyk2020.png
 server: shiny
 ---
 
