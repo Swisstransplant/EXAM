@@ -1,6 +1,7 @@
 ---
 title: "EXAM: Ex-vivo allograft monitoring"
 author: "v1.2"
+logo: images/SWT_icon_cmyk2020.dashboard.png
 format:
   dashboard:
     nav-buttons:
@@ -10,12 +11,13 @@ format:
     link-external-newwindow: true
     # link-external-filter: '^(?:http:|https:)\/\/www\.quarto\.org\/custom'
     theme: 
-      - default
       - swt_dashboard.scss
     fontsize: 0.95em
     linestretch: 1.2
-logo: images/SWT_icon_cmyk2020.png
 server: shiny
+include-in-header:
+  text: |
+    <link rel="icon" type="image/png" href="./images/Kreis_Niere_196x196.png">
 ---
 
 ```{r}
