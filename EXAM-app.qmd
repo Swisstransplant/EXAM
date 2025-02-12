@@ -9,7 +9,6 @@ format:
         href: https://github.com/Swisstransplant/EXAM
     link-external-icon: true
     link-external-newwindow: true
-    # link-external-filter: '^(?:http:|https:)\/\/www\.quarto\.org\/custom'
     theme: 
       - swt_dashboard.scss
     fontsize: 0.95em
@@ -86,23 +85,24 @@ fileInput(inputId = "file1", label = "Upload LifePort data file:",
                      ".csv"))
 ```
 
+::: {.callout-note appearance="simple" collapse="false"}
+## Terms of use
+By accessing or using this program, you agree to the terms of the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) and the following supplements to its sections 15 and 16:
 
-::: {.callout-warning collapse="false"}
+* The program is provided "as is" without warranty or any obligation from Swisstransplant;
+* Swisstransplant excludes liability for damages, losses, or claims arising from program use, to the extent permitted by law; and
+* You are solely responsible for evaluating the program’s functionality, suitability, and safety before use.
+
+Copyright (C) 2023--2025 Swisstransplant
+:::
+
+::: {.callout-important appearance="simple" collapse="false"}
 ## Important
-Hypothermic machine perfusion data alone should never be used as the sole basis to discard a kidney allograft.
+Hypothermic machine perfusion data should not be used as a basis for discarding a kidney allograft.
 
-Please do not upload personal, sensitive, or patient-identifiable data. Any data uploaded to the application is temporary and will be automatically deleted when the session ends. The developers are not liable for any misuse of the application or the data provided by users.
+Please refrain from uploading personal, sensitive, or patient-identifiable data. All uploaded data is temporary and will be automatically deleted at the end of the session. The developers assume no liability for any misuse of the application or the data provided by users.
 :::
 ---
-::: {.callout-note collapse="true"}
-## Terms of use
-
-EXAM: Ex-vivo allograft monitoring
-
-Copyright (C) 2023, 2024 Swisstransplant
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) for more details.
-:::
 
 # Kidney LifePort Dashboard
 
@@ -194,10 +194,6 @@ EXAM will enable transplant organizations to analyze their data, perform statist
 ## Who created EXAM?
 
 EXAM was developed by [Swisstransplant](https://www.swisstransplant.org/)---the Swiss national foundation for organ donation and transplantation, in collaboration with three Swiss transplant centers.
-
-## Terms of use
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) for more details.
 
 ## Contact
 For inquiries about EXAM, please get in touch with Simon Schwab <simon.schwab@swisstransplant.org>.
