@@ -15,8 +15,7 @@ format:
     linestretch: 1.2
 server: shiny
 include-in-header:
-  text: |
-    <link rel="icon" type="image/png" href="./images/Kreis_Niere_196x196.png">
+  file: header.js
 ---
 
 ```{r}
@@ -198,8 +197,17 @@ EXAM was developed by [Swisstransplant](https://www.swisstransplant.org/)---the 
 ## Contact
 For inquiries about EXAM, please get in touch with Simon Schwab <simon.schwab@swisstransplant.org>.
 
-## Reference
+## References
+
 Schwab S, Steck H, Binet I, Elmer A, Ender W, Franscini N, Haidar F, Kuhn C, Sidler D, Storni F, Krügel N, Immer F. EXAM: Ex-vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *PLOS Digit Health*. 2024;3(12):e0000691. [doi:10.1371/journal.pdig.0000691](https://doi.org/10.1371/journal.pdig.0000691)
+
+Schwab S. EXAM: Ex Vivo Allograft Monitoring Dashboard. Github; 2025. Accessed February 13, 2025. <https://github.com/Swisstransplant/EXAM>
+
+Schwab S. swt: Swisstransplant R Package. Github; 2024. Accessed February 13, 2025. <https://github.com/Swisstransplant/swt>
+
+## Acknowledgments
+
+EXAM was developed by Swisstransplant and three Swiss transplant centers.
 
 ::: {{layout-ncol=4}}
 
