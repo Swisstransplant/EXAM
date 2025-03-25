@@ -293,6 +293,7 @@ observeEvent(input$file1, {
 # Figure 1: Pressure Chart
 output$Fig1 <- renderPlotly({
   
+  # lst = lp_data # for debugging
   lst = dataset() # data is a list
   
   # converting from wide to long
@@ -319,6 +320,7 @@ output$Fig1 <- renderPlotly({
 # Figure 2: Flow Rate Chart
 output$Fig2 <- renderPlotly({
   
+  # lst = lp_data # for debugging
   lst = dataset() # data is a list
   d = lst$data
   
@@ -347,6 +349,7 @@ output$Fig2 <- renderPlotly({
 # Figure 3: Flow Rate Chart
 output$Fig3 <- renderPlotly({
   
+  # lst = lp_data # for debugging
   lst = dataset() # data is a list
   d = lst$data
   s = lst$data.sumstats
@@ -362,10 +365,14 @@ output$Fig3 <- renderPlotly({
   fig = plot_ly(d, x=~time.clock, y=~OrganResistance.flt, type="scatter", mode="lines", 
                 color="all", colors = col$blue.swt, name = "vascular resistance")
   
-  fig = fig %>% add_trace(x = c(d$time.clock[s$organResistance.x1], 
-                                d$time.clock[s$organResistance.x2]),
-                          y = c(s$organResistance.y1, s$organResistance.y2), 
-                          mode = "markers+lines", color = I(col$strongred.akzent), name = "slope")
+  # don't show slope when there are no x1, y1 and x2, y2 values
+  if (!is.na(s$organResistance.x1) & !is.na(s$organResistance.y1) & 
+      !is.na(s$organResistance.x1) & !is.na(s$organResistance.y1) ) { 
+    fig = fig %>% add_trace(x = c(d$time.clock[s$organResistance.x1], 
+                                  d$time.clock[s$organResistance.x2]),
+                            y = c(s$organResistance.y1, s$organResistance.y2), 
+                            mode = "markers+lines", color = I(col$strongred.akzent), name = "slope")
+  }
   
   fig = fig %>% layout(yaxis = list(title = "mmHg/ml/min", range = c(0, 0.5)),
                        xaxis = list(title = "Time"),

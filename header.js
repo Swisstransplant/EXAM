@@ -5,7 +5,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-4Q01TBQHST');
+  gtag('config', 'G-4Q01TBQHST', { 'anonymize_ip': true});
 </script>
 
 <!-- favicon -->
