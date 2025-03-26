@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.6.40" />
 
-<meta name="author" content="v1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
-<title>EXAM: Ex-vivo allograft monitoring</title>
+<meta name="author" content="v1.2" />
+<meta name="description" content="EXAM (ex vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation." />
+
+<title>EXAM</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,206 +26,212 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-
-<script src="EXAM-app_files/libs/clipboard/clipboard.min.js"></script>
-<script src="EXAM-app_files/libs/quarto-html/quarto.js"></script>
-<script src="EXAM-app_files/libs/quarto-html/popper.min.js"></script>
-<script src="EXAM-app_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="EXAM-app_files/libs/quarto-html/anchor.min.js"></script>
-<link href="EXAM-app_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="EXAM-app_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="EXAM-app_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="EXAM-app_files/libs/bootstrap/bootstrap-ccb9a37ad9dddf2078dacea74247dfa6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="EXAM-app_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/stickythead.js"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/datatables.min.js" kdttablesentinel="true"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/pdfmake.min.js" kdttablesentinel="true"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/vfs_fonts.js" kdttablesentinel="true"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/web-components.js" type="module"></script>
-<script src="EXAM-app_files/libs/quarto-dashboard/components.js"></script>
-<link href="EXAM-app_files/libs/quarto-dashboard/datatables.min.css" rel="stylesheet" kdttablesentinel="true">
-<!-- Google tag (gtag.js) -->
-
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4Q01TBQHST"></script>
-
-<script>
-
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag(){dataLayer.push(arguments);}
-
-  gtag('js', new Date());
-
-
-
-  gtag('config', 'G-4Q01TBQHST', { 'anonymize_ip': true});
-
-</script>
-
-
-
-<!-- favicon -->
-
-<link rel="icon" type="image/png" href="./images/Kreis_Niere_196x196.png">
-
+<!-- htmldependencies:E3FAD763 -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4Q01TBQHST"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4Q01TBQHST', { 'anonymize_ip': true});
+</script>
+
+<!-- favicon -->
+<link rel="icon" type="image/png" href="./images/Kreis_Niere_196x196.png">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="quarto-dashboard dashboard-fill dashboard-sidebar fullcontent">
+<body class="quarto-dashboard">
 
 <header id="quarto-dashboard-header">
 <nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
   <div class="navbar-container container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>    
 
 
     <div class="navbar-brand-container">       
-    <a href="#"><img src="images/SWT_icon_cmyk2020.dashboard.png" alt="" class="navbar-logo d-inline-block"></a>
+    <a href="#"><img src="images/SWT_2955_2021_border.png" alt="" class="navbar-logo d-inline-block"></a>
       <div class="navbar-title">
-        <div class="navbar-title-text"><a href="#">EXAM: Ex-vivo allograft monitoring</a></div>
+        <div class="navbar-title-text"><a href="#">EXAM</a></div>
         
         <div class="navbar-author">v1.2</div>
       </div>
     </div>
-<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-kidney-lifeport-dashboard" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#kidney-lifeport-dashboard" data-scrolling="false" href="#kidney-lifeport-dashboard" aria-controls="kidney-lifeport-dashboard" aria-selected="true"><span class="nav-link-text">Kidney LifePort Dashboard</span></a></li><li class="nav-item" role="presentation"><a id="tab-indicators" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#indicators" data-scrolling="false" href="#indicators" aria-controls="indicators" aria-selected="false"><span class="nav-link-text">Indicators</span></a></li><li class="nav-item" role="presentation"><a id="tab-about" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#about" data-scrolling="false" href="#about" aria-controls="about" aria-selected="false"><span class="nav-link-text">About</span></a></li></ul><div class="quarto-dashboard-links"><a class="quarto-dashboard-link" href="https://github.com/Swisstransplant/EXAM"><i class="bi bi-github"></i></a></div></div></div>
+</div>
 </nav>
 </header>
-<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages dashboard-sidebar-container">  
+<div class="page-layout-custom">  
 
-<div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
-<div class="tab-content bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div id="kidney-lifeport-dashboard" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-kidney-lifeport-dashboard">
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 13fr) minmax(3em, 37fr) minmax(3em, 37fr) minmax(3em, 13fr); grid-auto-columns: minmax(0, 1fr);">
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Organ and Device Information" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+<div class="sidebar-panel">
+<div class="sidebar">
+<div class="cell-output-display">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="ID-label" for="ID">Select example dataset:</label>
+<div>
+<select id="ID" class="shiny-input-select"><option value="ST-0002-Example" selected>ST-0002-Example</option>
+<option value="ST-0001-Example">ST-0001-Example</option></select>
+<script type="application/json" data-for="ID" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="file1-label" for="file1">Upload LifePort data file:</label>
+<div class="input-group">
+<label class="input-group-btn input-group-prepend">
+<span class="btn btn-default btn-file">
+Browse...
+<input id="file1" class="shiny-input-file" name="file1" type="file" style="position: absolute !important; top: -99999px !important; left: -99999px !important;" accept="text/csv,text/comma-separated-values,text/plain,.csv"/>
+</span>
+</label>
+<input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+</div>
+<div id="file1_progress" class="progress active shiny-file-input-progress">
+<div class="progress-bar"></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Terms of use
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>By accessing or using this program, you agree to the terms of the <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a> and the following supplements to its sections 15 and 16:</p>
+<ul>
+<li>The program is provided “as is” without warranty or any obligation from Swisstransplant;</li>
+<li>Swisstransplant excludes liability for damages, losses, or claims arising from program use, to the extent permitted by law; and</li>
+<li>You are solely responsible for evaluating the program’s functionality, suitability, and safety before use.</li>
+</ul>
+<p>This dashboard uses Google Analytics to analyze visitor traffic. To protect your privacy, we have enabled IP anonymization, which means your IP address is partially masked before being stored. Google Analytics helps us improve our dashboard, but you can opt out by adjusting your browser settings or using Google’s opt-out tool.</p>
+<p>Copyright (C) 2023–2025 Swisstransplant</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Hypothermic machine perfusion data should not be used as a basis for discarding a kidney allograft.</p>
+<p>Please refrain from uploading personal, sensitive, or patient-identifiable data. All uploaded data is temporary and will be automatically deleted at the end of the session. The developers assume no liability for any misuse of the application or the data provided by users.</p>
+</div>
+</div>
+</div>
+<hr />
+</div>
+<div class="sidebar-content">
+<div class="columns">
+<div id="kidney-lifeport-dashboard" class="dashboard-page" data-orientation="rows" data-title="Kidney LifePort Dashboard">
+<div class="rows">
+<div class="columns" data-height="13%">
+<div class="card cell" data-title="Organ and Device Information">
+<div class="card-header">
 Organ and Device Information
-</span></div></div>
-<div class="card-body html-fill-item html-fill-container">
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab_info" class="shiny-html-output html-fill-item html-fill-container"></div>
+</div>
+<div class="card-body">
+<div class="cell-output-display">
+<div id="Tab_info" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
-<div class="flow bslib-grid" data-layout="flow" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card html-fill-item html-fill-container bslib-card" data-title="Pressure" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+</div>
+<div class="columns flow" data-height="37%" data-layout="flow">
+<div class="card" data-padding="16px" data-title="Pressure">
+<div class="card-header">
 Pressure
-</span></div></div>
-<div class="cell card-body html-fill-item html-fill-container" style="padding: 16px;">
-<div class="cell-output-display html-fill-item html-fill-container">
-<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item html-fill-container" id="Fig1" style="width:100%;height:300px;"></div>
 </div>
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab1" class="shiny-html-output html-fill-item html-fill-container"></div>
+<div class="cell card-body">
+<div class="cell-output-display">
+<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item" id="Fig1" style="width:100%;height:300px;"></div>
+</div>
+<div class="cell-output-display">
+<div id="Tab1" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card html-fill-item html-fill-container bslib-card" data-title="Flow Rate" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+</div><div class="card" data-title="Flow Rate">
+<div class="card-header">
 Flow Rate
-</span></div></div>
-<div class="cell card-body html-fill-item html-fill-container">
-<div class="cell-output-display html-fill-item html-fill-container">
-<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item html-fill-container" id="Fig2" style="width:100%;height:300px;"></div>
 </div>
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab2" class="shiny-html-output html-fill-item html-fill-container"></div>
+<div class="cell card-body">
+<div class="cell-output-display">
+<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item" id="Fig2" style="width:100%;height:300px;"></div>
+</div>
+<div class="cell-output-display">
+<div id="Tab2" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card html-fill-item html-fill-container bslib-card" data-title="Vascular Resistance" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+</div>
+<div class="columns" data-height="37%">
+<div class="card" data-title="Vascular Resistance">
+<div class="card-header">
 Vascular Resistance
-</span></div></div>
-<div class="cell card-body html-fill-item html-fill-container">
-<div class="cell-output-display html-fill-item html-fill-container">
-<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item html-fill-container" id="Fig3" style="width:100%;height:300px;"></div>
 </div>
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab3" class="shiny-html-output html-fill-item html-fill-container"></div>
+<div class="cell card-body">
+<div class="cell-output-display">
+<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item" id="Fig3" style="width:100%;height:300px;"></div>
+</div>
+<div class="cell-output-display">
+<div id="Tab3" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card html-fill-item html-fill-container bslib-card" data-title="Temperature" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+</div><div class="card" data-title="Temperature">
+<div class="card-header">
 Temperature
-</span></div></div>
-<div class="cell card-body html-fill-item html-fill-container">
-<div class="cell-output-display html-fill-item html-fill-container">
-<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item html-fill-container" id="Fig4" style="width:100%;height:300px;"></div>
 </div>
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab4" class="shiny-html-output html-fill-item html-fill-container"></div>
+<div class="cell card-body">
+<div class="cell-output-display">
+<div class="plotly html-widget html-widget-output shiny-report-size shiny-report-theme html-fill-item" id="Fig4" style="width:100%;height:300px;"></div>
+</div>
+<div class="cell-output-display">
+<div id="Tab4" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
-grid-auto-rows: minmax(0, 1fr);">
-<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Quality Control" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-header"><div class="card-title html-fill-item html-fill-container"><span style="display: inline">
+</div>
+<div class="columns" data-height="13%">
+<div class="card cell" data-title="Quality Control">
+<div class="card-header">
 Quality Control
-</span></div></div>
-<div class="card-body html-fill-item html-fill-container">
-<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
-<div id="Tab_qual" class="shiny-html-output html-fill-item html-fill-container"></div>
+</div>
+<div class="card-body">
+<div class="cell-output-display">
+<div id="Tab_qual" class="shiny-html-output"></div>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
 </div>
-</div><div id="indicators" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-indicators">
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
-<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-body html-fill-item html-fill-container">
-<table class="caption-top table">
+</div>
+</div><div id="indicators" class="dashboard-page" data-orientation="rows" data-title="Indicators">
+<div class="rows">
+<div class="card" data-fill="false">
+<div class="card-body">
+<table class="caption-top">
 <colgroup>
-<col style="width: 30%">
-<col style="width: 16%">
-<col style="width: 32%">
-<col style="width: 21%">
+<col style="width: 30%" />
+<col style="width: 16%" />
+<col style="width: 32%" />
+<col style="width: 21%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -344,17 +353,12 @@ Quality Control
 </tbody>
 </table>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 </div>
-</div><div id="about" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-about">
-<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
-<div class="card html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
-<div class="card-body html-fill-item html-fill-container">
+</div>
+</div><div id="about" class="dashboard-page" data-orientation="rows" data-title="About">
+<div class="rows">
+<div class="card">
+<div class="card-body">
 <div class="h4">
 What
 
@@ -395,99 +399,18 @@ References
 Acknowledgments
 </div>
 <p>EXAM was developed by Swisstransplant and three Swiss transplant centers.</p>
-<div class="{{layout-ncol=4}} html-fill-item html-fill-container">
-<p><img src="images/SWT_2955_2021.png" style="float:left; padding:16px" height="80" alt="Surus"> <img src="images/HUG.png" style="float:left; padding:16px" height="80" alt="Surus"> <img src="images/Insel.png" style="float:left; padding:16px" height="80" alt="Surus"> <img src="images/KSSG.png" style="padding:16px" height="80" alt="Surus"></p>
+<div class="{{layout-ncol=4}}">
+<p><img src="images/SWT_2955_2021.png" style="float:left; padding:16px" height="80" alt="Surus" /> <img src="images/HUG.png" style="float:left; padding:16px" height="80" alt="Surus" /> <img src="images/Insel.png" style="float:left; padding:16px" height="80" alt="Surus" /> <img src="images/KSSG.png" style="padding:16px" height="80" alt="Surus" /></p>
 </div>
 </div>
-<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-    <template>Expand</template>
-    <span class="bslib-full-screen-enter badge rounded-pill">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
-    </span>
-</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
-<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+</div>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
 
 </div>
 </div>
 </div>
 </div>
-</div></div><aside id="bslib-sidebar-1" class="sidebar html-fill-container html-fill-item"><div class="html-fill-container html-fill-item">
-<div class="cell-output-display no-overflow-x">
-<div class="form-group shiny-input-container">
-<label class="control-label" id="ID-label" for="ID">Select example dataset:</label>
-<div>
-<select id="ID" class="shiny-input-select"><option value="ST-0002-Example" selected="">ST-0002-Example</option>
-<option value="ST-0001-Example">ST-0001-Example</option></select>
-<script type="application/json" data-for="ID" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
 </div>
-</div>
-</div>
-<div class="cell-output-display">
-<div class="form-group shiny-input-container">
-<label class="control-label" id="file1-label" for="file1">Upload LifePort data file:</label>
-<div class="input-group">
-<label class="input-group-btn input-group-prepend">
-<span class="btn btn-default btn-file">
-Browse...
-<input id="file1" class="shiny-input-file" name="file1" type="file" style="position: absolute !important; top: -99999px !important; left: -99999px !important;" accept="text/csv,text/comma-separated-values,text/plain,.csv">
-</span>
-</label>
-<input type="text" class="form-control" placeholder="No file selected" readonly="readonly">
-</div>
-<div id="file1_progress" class="progress active shiny-file-input-progress">
-<div class="progress-bar"></div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Terms of use
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>By accessing or using this program, you agree to the terms of the <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a> and the following supplements to its sections 15 and 16:</p>
-<ul>
-<li>The program is provided “as is” without warranty or any obligation from Swisstransplant;</li>
-<li>Swisstransplant excludes liability for damages, losses, or claims arising from program use, to the extent permitted by law; and</li>
-<li>You are solely responsible for evaluating the program’s functionality, suitability, and safety before use.</li>
-</ul>
-<p>Copyright (C) 2023–2025 Swisstransplant</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>Hypothermic machine perfusion data should not be used as a basis for discarding a kidney allograft.</p>
-<p>Please refrain from uploading personal, sensitive, or patient-identifiable data. All uploaded data is temporary and will be automatically deleted at the end of the session. The developers assume no liability for any misuse of the application or the data provided by users.</p>
-</div>
-</div>
-</div>
-<hr>
-</div></aside>
-<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-1">
-    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img">
-      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
-    </svg>
-</button>
-<script data-bslib-sidebar-init="">
-bslib.Sidebar.initCollapsibleAll()
-</script>
 </div>
 <p>
 <script type="application/shiny-prerendered" data-context="server-start">
@@ -860,7 +783,7 @@ ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
 <!--/html_preserve-->
 
 
-<script id="quarto-html-after-body" type="application/javascript">
+<script id = "quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1294,7 +1217,6 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
 }); 
 </script>
   
+</body>
 
-
-
-</body></html>
+</html>

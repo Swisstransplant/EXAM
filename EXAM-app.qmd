@@ -1,16 +1,17 @@
 ---
-title: "EXAM: Ex-vivo allograft monitoring"
+title: "EXAM"
 author: "v1.2"
-logo: images/SWT_icon_cmyk2020.dashboard.png
+logo: images/SWT_2955_2021_border.png
 format:
   dashboard:
+    description-meta: "EXAM (ex vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation."
     nav-buttons:
       - icon: github
         href: https://github.com/Swisstransplant/EXAM
     link-external-icon: true
     link-external-newwindow: true
     theme: 
-      - swt_dashboard.scss
+      - swt.scss
     fontsize: 0.95em
     linestretch: 1.2
 server: shiny
@@ -84,13 +85,15 @@ fileInput(inputId = "file1", label = "Upload LifePort data file:",
                      ".csv"))
 ```
 
-::: {.callout-note appearance="simple" collapse="false"}
+::: {.callout-note appearance="simple" collapse="true"}
 ## Terms of use
 By accessing or using this program, you agree to the terms of the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) and the following supplements to its sections 15 and 16:
 
 * The program is provided "as is" without warranty or any obligation from Swisstransplant;
 * Swisstransplant excludes liability for damages, losses, or claims arising from program use, to the extent permitted by law; and
 * You are solely responsible for evaluating the program’s functionality, suitability, and safety before use.
+
+This dashboard uses Google Analytics to analyze visitor traffic. To protect your privacy, we have enabled IP anonymization, which means your IP address is partially masked before being stored. Google Analytics helps us improve our dashboard, but you can opt out by adjusting your browser settings or using Google's opt-out tool.
 
 Copyright (C) 2023--2025 Swisstransplant
 :::
