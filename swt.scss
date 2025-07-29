@@ -3,13 +3,15 @@
 /*-- scss:defaults --*/
 
 // colors dashboard
-$navbar-bg: #e6eef0;
+$navbar-bg: #E6EEF0;
 $navbar-fg: #003764;
-$navbar-hl: #e5005c;
+$navbar-hl: #E5005C;
 
 // colors document
 $link-color: #E5005C;
-$table-border-color: #dee2e6; // quarto bug, callout border box disappears
+$code-block-bg: #E6EEF0;
+$code-block-border-left: #3F698A;
+$table-border-color: #DEE2E6; // quarto bug, callout border box disappears
 
 /*-- scss:rules --*/
 

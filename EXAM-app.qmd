@@ -4,7 +4,7 @@ author: "v1.2"
 logo: images/SWT_2955_2021_border.png
 format:
   dashboard:
-    description-meta: "EXAM (ex vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation."
+    description-meta: "EXAM (ex-vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation."
     nav-buttons:
       - icon: github
         href: https://github.com/Swisstransplant/EXAM
@@ -166,16 +166,16 @@ tableOutput('Tab_qual')
 |                        | $m_{dia}$   | mean diastolic pressure  | mmHg            |
 |                        | $m_{flow}$  | mean flow rate           | ml/min          |
 |                        | $m_{res}$   | mean vascular resistance | mmHg/ml/min     |
-|                        | $SD_{res}$  | standard deviation of vascular resistance | mmHg/ml/min     |
-|                        | $\Delta_{res}$   | drop in vascular resistance within the first 60 min | mmHg/ml/min     |
-|                        | $\beta_{res}$    | drop in vascular resistance per Minute | mmHg/ml/min$^2$ |
-| Temperature indicators | $m_{ice}$            | mean ice temperature                                        | $\textdegree$C |
-|                        | $SD_{ice}$           | standard deviation of ice temperature                       | $\textdegree$C |
-|                        | $\Delta t_{ice>2.5}$ | time duration ice temperature is above 2.5$\textdegree$C    | MM:HH:SS       |
-|                        | $y_{\text{start}}$ | perfusate temperature at start                          | $\textdegree$C |
-|                        | $m_{perf}$           | mean perfusate temperature                              | $\textdegree$C |
-|                        | $SD_{perf}$          | standard deviation of perfusate temperature             | $\textdegree$C |
-|                        | $\Delta t_{perf>10}$ | time duration perfusate temperature is above 10$\textdegree$C | MM:HH:SS     |
+|                        | $SD_{res}$  | std. dev. of  resistance | mmHg/ml/min     |
+|                        | $\Delta_{res}$ | drop in resistance within first 60 min  | mmHg/ml/min    |
+|                        | $\beta_{res}$  | drop in resistance per Minute           | mmHg/ml/min$^2$|
+| Temperature indicators | $m_{ice}$          | mean ice temperature                | $\textdegree$C |
+|                        | $SD_{ice}$         | std. dev. of ice temperature        | $\textdegree$C |
+|                        | $y_{\text{start}}$ | perfusate temperature at start      | $\textdegree$C |
+|                        | $m_{perf}$           | mean perfusate temperature        | $\textdegree$C |
+|                        | $SD_{perf}$          | std. dev. of perfusate temperature| $\textdegree$C |
+|                        | $\Delta t_{ice>3}$   | duration ice temp. above 3$\textdegree$C    | MM:HH:SS |
+|                        | $\Delta t_{perf>10}$ | duration perf. temp. above 10$\textdegree$C | MM:HH:SS |
 | Quality control        | $D^2_{perf}$     | Distance of the case from other cases with respect to perfusion indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
 |                        | $P_{perf}$       | Percentile rank of $D^2_{perf}$. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  | % |
 |                        | $D^2_{temp}$     | Distance of the case from other cases with respect to temperature indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
@@ -185,32 +185,24 @@ tableOutput('Tab_qual')
 
 ::: {.card}
 
-## What is EXAM?
+## About
 
-EXAM is a dashboard for analyzing hypothermic machine perfusion data from the [ORS LifePort Kidney Transporter](https://www.organ-recovery.com/lifeport-kidney-transporter/). EXAM is free software written in the R programming language.
-
-## Why is EXAM useful?
-
-EXAM will enable transplant organizations to analyze their data, perform statistics, and conduct quality checks, allowing them to identify potential issues and optimize machine perfusion processes, ultimately benefiting kidney recipients.
-
-## Who created EXAM?
-
-EXAM was developed by [Swisstransplant](https://www.swisstransplant.org/)---the Swiss national foundation for organ donation and transplantation, in collaboration with three Swiss transplant centers.
+EXAM (ex-vivo allograft monitoring) is a dashboard for analyzing hypothermic machine perfusion data from the [ORS LifePort Kidney Transporter](https://www.organ-recovery.com/lifeport-kidney-transporter/). EXAM is free software written in the R programming language.
 
 ## Contact
 For inquiries about EXAM, please get in touch with Simon Schwab <simon.schwab@swisstransplant.org>.
 
 ## References
 
-Schwab S, Steck H, Binet I, Elmer A, Ender W, Franscini N, Haidar F, Kuhn C, Sidler D, Storni F, Krügel N, Immer F. EXAM: Ex-vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *PLOS Digit Health*. 2024;3(12):e0000691. [doi:10.1371/journal.pdig.0000691](https://doi.org/10.1371/journal.pdig.0000691)
+Schwab S, Steck H, Binet I, et al. EXAM: Ex-vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *PLOS Digit Health*. 2024;3(12):e0000691. [doi:10.1371/journal.pdig.0000691](https://doi.org/10.1371/journal.pdig.0000691)
 
-Schwab S. EXAM: Ex Vivo Allograft Monitoring Dashboard. Github; 2025. Accessed February 13, 2025. <https://github.com/Swisstransplant/EXAM>
+Schwab S. EXAM: Ex-vivo allograft monitoring dashboard. Github; 2025. Accessed February 13, 2025. <https://github.com/Swisstransplant/EXAM>
 
 Schwab S. swt: Swisstransplant R Package. Github; 2024. Accessed February 13, 2025. <https://github.com/Swisstransplant/swt>
 
 ## Acknowledgments
 
-EXAM was developed by Swisstransplant and three Swiss transplant centers.
+EXAM was developed by Swisstransplant in collaboration with three Swiss transplant centers.
 
 ::: {{layout-ncol=4}}
 
@@ -260,24 +252,22 @@ observeEvent(input$file1, {
                                                         "diastolicPressure.mean",
                                                         "flowRate.mean",
                                                         "organResistance.mean",
-                                                        "organResistance.sd",
-                                                        "organResistance.delta",
-                                                        "organResistance.slope"))
+                                                        "organResistance.sd"))
     
     tmp.temp = subset(lp_data$data.sumstats, select = c("iceContainerTemperature.mean",
                                                         "iceContainerTemperature.sd",
-                                                        "iceContainerTemperature.minAbove",
                                                         "infuseTemperature.start",
                                                         "infuseTemperature.mean",
-                                                        "infuseTemperature.sd",
-                                                        "infuseTemperature.minAbove"))
+                                                        "infuseTemperature.sd"))
     
-    # calculate for all datasets, if missing data D2 will be NA
-    lp_data$data.sumstats$D2perf = lifeport_d2(data = tmp.perf, type = "perf")
-    lp_data$data.sumstats$D2temp = lifeport_d2(data = tmp.temp, type = "temp")
+    # calculate D^2
+    stats = lifeport_d2(data = tmp.perf, type = "perf")
+    lp_data$data.sumstats$D2perf = stats$d2
+    lp_data$data.sumstats$Pperf = stats$rank
     
-    lp_data$data.sumstats$Pperf  = lifeport_d2toRank(lp_data$data.sumstats$D2perf, type = "perf")
-    lp_data$data.sumstats$Ptemp  = lifeport_d2toRank(lp_data$data.sumstats$D2temp, type = "temp")
+    stats = lifeport_d2(data = tmp.temp, type = "temp")
+    lp_data$data.sumstats$D2temp = stats$d2
+    lp_data$data.sumstats$Ptemp  = stats$rank
     
     dataset(lp_data)
     
@@ -315,7 +305,7 @@ output$Fig1 <- renderPlotly({
                        xaxis = list(title = "Time"),
                        legend = list(orientation = 'h',  yanchor = "bottom",  
                                      y = 1.02, x = 1, xanchor = "right"),
-                       shapes = list(hline(30))
+                       shapes = list(hline(20), hline(30))
   )
   
 })
@@ -329,9 +319,9 @@ output$Fig2 <- renderPlotly({
   
   # handle timeseries shorter than 30 min.
   if(length(d$time.clock) >= 181) {
-    tgreyend =  d$time.clock[181]
+    t_30 =  d$time.clock[181]
   } else {
-    tgreyend = d$time.clock[length(d$time.clock)]
+    t_30 = d$time.clock[length(d$time.clock)]
   }
   
   # figure
@@ -339,12 +329,8 @@ output$Fig2 <- renderPlotly({
                 color="all", colors = col$blue.swt)
   fig = fig %>% layout(yaxis = list(title = "ml/min", range = c(0, 200)),
                        xaxis = list(title = "Time"),
-                       shapes = list(hline(85), 
-                                     list(type = "rect", fillcolor = "grey",
-                                          line = list(color = "grey"), opacity = 0.3,
-                                          x0 = d$time.clock[1], x1 = tgreyend, xref = "x",
-                                          y0 = 0, y1 = 200, yref = "y")
-                       )
+                       shapes = list(hline(100),
+                                     vline(t_30, type="dot"))
   )
   
 })
@@ -359,9 +345,9 @@ output$Fig3 <- renderPlotly({
   
   # handle timeseries shorter than 30 min.
   if(length(d$time.clock) >= 181) {
-    tgreyend =  d$time.clock[181]
+    t_30 =  d$time.clock[181]
   } else {
-    tgreyend = d$time.clock[length(d$time.clock)]
+    t_30 = d$time.clock[length(d$time.clock)]
   }
   
   # figure
@@ -383,10 +369,7 @@ output$Fig3 <- renderPlotly({
                                      y = 1.02, x = 1, xanchor = "right"),
                        shapes = list(hline(0.10), 
                                      hline(0.30),
-                                     list(type = "rect", fillcolor = "grey",
-                                          line = list(color = "grey"), opacity = 0.3,
-                                          x0 = d$time.clock[1], x1 = tgreyend, xref = "x",
-                                          y0 = 0, y1 = 0.5, yref = "y")
+                                     vline(t_30, type="dot")
                        )
   )
   
@@ -396,7 +379,7 @@ output$Fig3 <- renderPlotly({
 output$Fig4 <- renderPlotly({
   
   HIGH_INF_TEMP = 10
-  HIGH_ICE_TEMP = 2.5
+  HIGH_ICE_TEMP = 3.0
   
   lst = dataset() # data is a list
   
@@ -483,7 +466,7 @@ output$Tab4 <- renderTable({
                               "infuseTemperature.mean", "infuseTemperature.sd",
                               "infuseTemperature.minAbove.str")]
   colnames(tab) = c("<i>m</i><sub>ice</sub>", "<i>SD</i><sub>ice</sub>", 
-                    "<i>&#916t</i><sub>y>2.5</sub>", "<i>y</i><sub>start</sub>",
+                    "<i>&#916t</i><sub>y>3</sub>", "<i>y</i><sub>start</sub>",
                     "<i>m</i><sub>perf</sub>", "<i>SD</i><sub>perf</sub>", 
                     "<i>&#916t</i><sub>y>10</sub>")
   tab

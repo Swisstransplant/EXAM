@@ -1,8 +1,8 @@
 SerialNumber,Type,SubType,UnitID,FirmwareVersion,FileID,StartTime,DataState,HasGaps
-1423112,UsbEnhanced,USB,BERN1,515,39,01.01.2022 11:11:11,Complete,False
+1423112,UsbEnhanced,USB,BERN1,515,39,17.06.1950 01:01:01,Complete,False
 
 OrganID,KidneySide,BloodType,CrossClampTime&Date,CrossClampTimezone,TotalIschemicTime,PerfusateLot,PerfusateExpirationDate,PerfusateUsed,Cannula,CannulaExpirationDate,CassetteLot#,CasetteExpirationDate
-Test1,Right,A,,,,,,,,,,
+Anonymous,Right,A,,,,,,,,,,
 
 SequentialRecordNumber,SerialNumber,FileID,InfuseTime,FlowRate,OrganResistance,IceContainerTemperature,InfuseTemperature,Error1,Error2,State,PressureSet,AveragePressure,DiastolicPressure,SystolicPressure,Checksum
 00001,1423112,39,00:00:00,014,021,0012,0086,0000,0000,10,30,3,0,0,130
