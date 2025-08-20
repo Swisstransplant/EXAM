@@ -1,9 +1,9 @@
-# EXAM: Ex vivo allograft monitoring dashboard <img src="images/hex-exam.png" align="right" width=139 height=139 alt="" />
+# EXAM: Ex-vivo allograft monitoring dashboard <img src="images/hex-exam.png" align="right" width=139 height=139 alt="" />
 
-EXAM (ex vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation.
+EXAM (ex-vivo allograft monitoring) is an analytics dashboard for the hypothermic machine perfusion data in deceased-donor kidney transplantation.
 
 ## Background
-Deceased-donor kidney allografts are exposed to injury during ex vivo transport due to the lack of blood oxygen supply. Hypothermic machine perfusion (HMP) effectively reduces the risk of delayed graft function in kidney transplant recipients compared to standard cold storage. However, no software implementation is available to read, process, and analyze HMP data for state-of-the-art visualization and quality control.
+Deceased-donor kidney allografts are exposed to injury during ex-vivo transport due to the lack of blood oxygen supply. Hypothermic machine perfusion (HMP) effectively reduces the risk of delayed graft function in kidney transplant recipients compared to standard cold storage. However, no software implementation is available to read, process, and analyze HMP data for state-of-the-art visualization and quality control.
 
 EXAM can read, process, and visualize raw data from the LifePort kidney transporter (Organ Recovery Systems, USA).
 
