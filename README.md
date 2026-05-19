@@ -23,7 +23,7 @@ A detailed project description is provided in the reference at the bottom.
 The dashboard is available at <https://data.swisstransplant.org/exam/>.
 
 ## Validation
-We have compared the EXAM tool with numerous case reports created by the software ORS Data Station. We made one such [case report available](https://github.com/Swisstransplant/EXAM/blob/main/examples/LifePort%20DataStation%20Case%20Report%20ST-0001-Example.pdf); it can be compared to data from `ST-0001-Example` in the live dashboard.
+We have compared the EXAM tool with numerous case reports created by the software ORS Data Station. We made one such [case report available](https://github.com/Swisstransplant/EXAM/blob/main/examples/LifePort%20DataStation%20Case%20Report%20ST-0001-Example.pdf); it can be compared to data from `ST-0001-Perfect` in the live dashboard.
 
 ## References
 Schwab S, Steck H, Binet I, Elmer A, Ender W, Franscini N, Haidar F, Kuhn C, Sidler D, Storni F, Krügel N, Immer F. EXAM: Ex-vivo allograft monitoring dashboard for the analysis of hypothermic machine perfusion data in deceased-donor kidney transplantation. *PLOS Digit Health*. 2024;3(12):e0000691. [doi:10.1371/journal.pdig.0000691](http://dx.doi.org/10.1371/journal.pdig.0000691)
