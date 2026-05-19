@@ -1,6 +1,6 @@
 ---
 title: "EXAM"
-author: "v1.2"
+author: "v1.2.1"
 logo: images/SWT_2955_2021_border.png
 format:
   dashboard:
