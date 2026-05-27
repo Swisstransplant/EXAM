@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,9 +35,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="EXAM-app_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="EXAM-app_files/libs/quarto-html/anchor.min.js"></script>
 <link href="EXAM-app_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-ceca7ca9e3897df6eb514097897b8f25.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-dark-9e6f7ed7e1788bccce7b25630a75907c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-ceca7ca9e3897df6eb514097897b8f25.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-613ced0442d59d24a9a409d96140cce0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-dark-b756425ebec72e7a03fe3e308012fc60.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="EXAM-app_files/libs/quarto-html/quarto-syntax-highlighting-613ced0442d59d24a9a409d96140cce0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="EXAM-app_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="EXAM-app_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="EXAM-app_files/libs/bootstrap/bootstrap-b1c2ef7cf10e60cdc8b58218564f3de4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -605,9 +605,9 @@ output$Fig1 <- renderPlotly({
                               lst$data$DiastolicPressure.flt),
                  time.clock = c(lst$data$time.clock, 
                                 lst$data$time.clock),
-                 group = c(rep("systolic pressure", nrow(lst$data)), 
-                           rep("diastolic pressure", nrow(lst$data))))
-  d$group = factor(d$group, levels = c("systolic pressure", "diastolic pressure"))
+                 group = c(rep("Systolic pressure", nrow(lst$data)), 
+                           rep("Diastolic pressure", nrow(lst$data))))
+  d$group = factor(d$group, levels = c("Systolic pressure", "Diastolic pressure"))
   
   # figure
   fig = plot_ly(d, x=~time.clock, y=~pressure, type="scatter", mode="lines", 
@@ -663,7 +663,7 @@ output$Fig3 <- renderPlotly({
   
   # figure
   fig = plot_ly(d, x=~time.clock, y=~OrganResistance.flt, type="scatter", mode="lines", 
-                color="all", colors = col$blue.swt, name = "vascular resistance")
+                color="all", colors = col$blue.swt, name = "Vascular resistance")
   
   # don't show slope when there are no x1, y1 and x2, y2 values
   if (!is.na(s$organResistance.x1) & !is.na(s$organResistance.y1) & 
@@ -671,7 +671,7 @@ output$Fig3 <- renderPlotly({
     fig = fig %>% add_trace(x = c(d$time.clock[s$organResistance.x1], 
                                   d$time.clock[s$organResistance.x2]),
                             y = c(s$organResistance.y1, s$organResistance.y2), 
-                            mode = "markers+lines", color = I(col$strongred.akzent), name = "slope")
+                            mode = "markers+lines", color = I(col$strongred.akzent), name = "Slope")
   }
   
   fig = fig %>% layout(yaxis = list(title = "mmHg/ml/min", range = c(0, 0.5)),
@@ -692,6 +692,9 @@ output$Fig4 <- renderPlotly({
   HIGH_INF_TEMP = 10
   HIGH_ICE_TEMP = 3.0
   
+  CODE_HIGHTEMP = 4096
+  CODE_TEMPSHUTDOWN = 8192
+  
   lst = dataset() # data is a list
   
   # prepare time series of ice and perf temp too high
@@ -710,14 +713,14 @@ output$Fig4 <- renderPlotly({
                                  high_perf,
                                  high_ice),
                  time.clock = rep(lst$data$time.clock, 4),
-                 group = c(rep("ice temperature", nrow(lst$data)), 
-                           rep("perfusate temperature", nrow(lst$data)),
-                           rep("high temperature", nrow(lst$data)),
-                           rep("high temperature", nrow(lst$data))
+                 group = c(rep("Ice temperature", nrow(lst$data)), 
+                           rep("Perfusate temperature", nrow(lst$data)),
+                           rep("High temperature", nrow(lst$data)),
+                           rep("High temperature", nrow(lst$data))
                  ))
-  d$group = factor(d$group, levels = c("ice temperature", 
-                                       "perfusate temperature",
-                                       "high temperature"))
+  d$group = factor(d$group, levels = c("Ice temperature", 
+                                       "Perfusate temperature",
+                                       "High temperature"))
   
   # figure
   fig = plot_ly(d, x=~time.clock, y=~temperature, type="scatter", mode="lines", 
@@ -731,6 +734,31 @@ output$Fig4 <- renderPlotly({
                        shapes = list(hline(5), hline(10))
   )
   
+  # Add high temperature events
+  if (CODE_HIGHTEMP %in% lst$data$Error2) {
+    i =  which(lst$data$Error2 == CODE_HIGHTEMP)[1]
+    fig = fig %>% add_markers(x = lst$data$time.clock[i], y = lst$data$IceContainerTemperature[i]-2,
+                              marker = list(symbol = "triangle-up", size = 14, color = "orange"),
+                              name = "Ice alert", inherit = FALSE)
+  }
+  
+  # also sometimes contained in Error1, but not often
+  if (CODE_HIGHTEMP %in% lst$data$Error1) {
+    i =  which(lst$data$Error1 == CODE_HIGHTEMP)[1]
+    fig = fig %>% add_markers(x = lst$data$time.clock[i], y = lst$data$IceContainerTemperature[i]-2,
+                              marker = list(symbol = "triangle-up", size = 14, color = "orange"),
+                              name = "Ice alert", inherit = FALSE)
+  }
+  
+  # Add temperature shutdown
+  if (CODE_TEMPSHUTDOWN %in% lst$data$Error1) {
+    i =  which(lst$data$Error1 == CODE_TEMPSHUTDOWN)[1]
+    fig = fig %>% add_markers(x = lst$data$time.clock[i], y = lst$data$IceContainerTemperature[i]-2,
+                              marker = list(symbol = "triangle-up", size = 14, color = "red"),
+                              name = "High temp. shutdown", inherit = FALSE)
+  }
+  
+  fig
 })
 
 # Info table
