@@ -16,7 +16,7 @@ format:
     linestretch: 1.2
 server: shiny
 include-in-header:
-  file: header.js
+  file: _header.html
 ---
 
 ```{r}
@@ -93,9 +93,7 @@ By accessing or using this program, you agree to the terms of the [GNU Affero Ge
 * Swisstransplant excludes liability for damages, losses, or claims arising from program use, to the extent permitted by law; and
 * You are solely responsible for evaluating the program’s functionality, suitability, and safety before use.
 
-This dashboard uses Google Analytics to analyze visitor traffic. To protect your privacy, we have enabled IP anonymization, which means your IP address is partially masked before being stored. Google Analytics helps us improve our dashboard, but you can opt out by adjusting your browser settings or using Google's opt-out tool.
-
-Copyright (C) 2023--2025 Swisstransplant
+Copyright (C) 2023--2026 Swisstransplant
 :::
 
 ::: {.callout-important appearance="simple" collapse="false"}

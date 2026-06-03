@@ -1,0 +1,18 @@
+<!-- favicon -->
+<link rel="icon" type="image/png" href="./images/Kreis_Niere_196x196.png">
+
+<!-- Plausible -->
+<script async src="https://plausible.io/js/pa-iA2W4aMrjS4HpLwVcKA1O.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+
+// Custom event for dashboard tracking
+document.addEventListener("DOMContentLoaded",
+function () {
+  plausible('dashboard_view', {
+    props: { dashboard: 'EXAM' }
+  });
+});
+
+</script>
