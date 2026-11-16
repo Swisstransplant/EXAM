@@ -1,6 +1,6 @@
 ---
 title: "EXAM"
-author: "v1.2.1"
+author: "v1.3"
 logo: images/SWT_2955_2021_border.png
 format:
   dashboard:
@@ -28,7 +28,9 @@ library(fs) # MIT
 library(shiny) # GPL-3
 suppressPackageStartupMessages(library(plotly)) # MIT
 library(swt) # GPL-3
-# Quarto MIT
+
+# Maximal 1 MB Upload
+options(shiny.maxRequestSize = 1 * 1024^2)
 
 # SWT colors
 col = swt_colors()
@@ -78,7 +80,7 @@ vline <- function(x = 0, color = "grey", type="dash") {
 selectInput(inputId = "ID", label = "Select example dataset:",
             choices = sort(exam.organ$ID, decreasing = TRUE))
 
-fileInput(inputId = "file1", label = "Upload LifePort data file:",
+fileInput(inputId = "file1", label = "Upload LifePort data file (max. 1 MB):",
           multiple = FALSE,
           accept = c("text/csv",
                      "text/comma-separated-values,text/plain",
@@ -167,13 +169,13 @@ tableOutput('Tab_qual')
 |                        | $SD_{res}$  | std. dev. of  resistance | mmHg/ml/min     |
 |                        | $\Delta_{res}$ | drop in resistance within first 60 min  | mmHg/ml/min    |
 |                        | $\beta_{res}$  | drop in resistance per Minute           | mmHg/ml/min$^2$|
-| Temperature indicators | $m_{ice}$          | mean ice temperature                | $\textdegree$C |
-|                        | $SD_{ice}$         | std. dev. of ice temperature        | $\textdegree$C |
-|                        | $y_{\text{start}}$ | perfusate temperature at start      | $\textdegree$C |
-|                        | $m_{perf}$           | mean perfusate temperature        | $\textdegree$C |
-|                        | $SD_{perf}$          | std. dev. of perfusate temperature| $\textdegree$C |
-|                        | $\Delta t_{ice>3}$   | duration ice temp. above 3$\textdegree$C    | MM:HH:SS |
-|                        | $\Delta t_{perf>10}$ | duration perf. temp. above 10$\textdegree$C | MM:HH:SS |
+| Temperature indicators | $m_{ice}$          | mean ice temperature                | $^\circ$C |
+|                        | $SD_{ice}$         | std. dev. of ice temperature        | $^\circ$C |
+|                        | $y_{\text{start}}$ | perfusate temperature at start      | $^\circ$C |
+|                        | $m_{perf}$           | mean perfusate temperature        | $^\circ$C |
+|                        | $SD_{perf}$          | std. dev. of perfusate temperature| $^\circ$C |
+|                        | $\Delta t_{ice>3}$   | duration ice temp. above 3$^\circ$C    | MM:HH:SS |
+|                        | $\Delta t_{perf>10}$ | duration perf. temp. above 10$^\circ$C | MM:HH:SS |
 | Quality control        | $D^2_{perf}$     | Distance of the case from other cases with respect to perfusion indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
 |                        | $P_{perf}$       | Percentile rank of $D^2_{perf}$. For example, a score of 0.90 means that 90% of the cases had a better result (thus, a lower score is better).  | % |
 |                        | $D^2_{temp}$     | Distance of the case from other cases with respect to temperature indicators (a lower score is better). It can be seen as the deviation from the norm. | *unitless* |
@@ -185,7 +187,7 @@ tableOutput('Tab_qual')
 
 ## About
 
-EXAM (ex-vivo allograft monitoring) is a dashboard for analyzing hypothermic machine perfusion data from the [ORS LifePort Kidney Transporter](https://www.organ-recovery.com/lifeport-kidney-transporter/). EXAM is free software written in the R programming language.
+EXAM (ex-vivo allograft monitoring) is a dashboard for analyzing hypothermic machine perfusion data from the [ORS LifePort Kidney Transporter](https://www.organ-recovery.com/lifeport-kidney-transporter/). EXAM is free software written in R.
 
 ## Contact
 For inquiries about EXAM, please get in touch with Simon Schwab <simon.schwab@swisstransplant.org>.
@@ -196,7 +198,7 @@ Schwab S, Steck H, Binet I, et al. EXAM: Ex-vivo allograft monitoring dashboard 
 
 Schwab S. EXAM: Ex-vivo allograft monitoring dashboard. Github; 2025. Accessed February 13, 2025. <https://github.com/Swisstransplant/EXAM>
 
-Schwab S. swt: Swisstransplant R Package. Github; 2024. Accessed February 13, 2025. <https://github.com/Swisstransplant/swt>
+Schwab S. swt: Swisstransplant R Package. GitHub; 2024. Accessed February 13, 2025. <https://github.com/Swisstransplant/swt>
 
 ## Acknowledgments
 
@@ -207,7 +209,7 @@ EXAM was developed by Swisstransplant in collaboration with three Swiss transpla
 ![Surus](images/SWT_2955_2021.png){height=80 style="float:left; padding:16px"}
 ![Surus](images/HUG.png){height=80 style="float:left; padding:16px"}
 ![Surus](images/Insel.png){height=80 style="float:left; padding:16px"}
-![Surus](images/KSSG.png){height=80 style="padding:16px"}
+![Surus](images/hoch.png){height=64 style="padding:16px"}
 
 :::
 
